@@ -1,0 +1,59 @@
+# Each [[feed]] becomes one Atom file at <base_url><slug>.xml.
+#
+# Terms match Hacker News story titles exactly: no typo matching, plurals
+# allowed, and a multi-word term matches only as a phrase. Matching ignores
+# case except for the terms in case_sensitive.
+
+base_url = "https://stevenfazzio.com/feeds/"
+days = 30
+case_sensitive = ["UMAP"]  # not "uMap", an OpenStreetMap tool
+
+[[feed]]
+slug = "hn-help"
+title = "HN: where you can help"
+kind = "story"
+exclude_tags = ["show_hn"]  # those go to hn-show
+terms = [
+  # Not plain "embedding": that also means embedding Node.js or a font.
+  "embeddings",
+  "embedding model",
+  "embedding space",
+  "UMAP",
+  "dimensionality reduction",
+  "topic modeling",
+  "topic modelling",
+  "topic model",
+  "BERTopic",
+  "Toponymy",
+  "HDBSCAN",
+  "DataMapPlot",
+  "visualization",
+  "visualisation",
+  "semantic search",
+]
+
+[[feed]]
+slug = "hn-show"
+title = "Show HN: your areas"
+kind = "show_hn"
+terms_from = "hn-help"
+
+[[feed]]
+slug = "hn-curious"
+title = "HN: where you're curious"
+kind = "story"
+terms = [
+  "Shtetl",
+  "Scott Aaronson",
+  "OEIS",
+  "Manim",
+  "Maine",
+]
+
+# Its own feed because it runs about 35 stories a month and would bury the
+# rest of hn-curious.
+[[feed]]
+slug = "hn-wikipedia"
+title = "HN: Wikipedia"
+kind = "story"
+terms = ["Wikipedia", "Wikidata"]
